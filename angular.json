@@ -31,7 +31,6 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "./node_modules/keycloak-js/dist/keycloak.min.js"
             ]
           },
           "configurations": {

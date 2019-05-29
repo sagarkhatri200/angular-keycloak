@@ -4,21 +4,25 @@ import { NgModule, APP_INITIALIZER  } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { KeycloakService } from './keycloak.service';
 import { ReadComponent } from './read/read.component';
 import { WriteComponent } from './write/write.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule, MatButtonModule, MatIconModule } from '@angular/material';
+import { AdminComponent } from './admin/admin.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { initializer } from './app-init';
+import { AppAuthGuard } from './KioskAuthGuard';
+import { AdminAuthGuard } from './AdminAuthGuard';
 
-export function kcFactory(keycloakService: KeycloakService) {
-  return () => keycloakService.init();
-}
 
 @NgModule({
   declarations: [
     AppComponent,
     ReadComponent,
-    WriteComponent
+    WriteComponent,
+    AdminComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
@@ -26,15 +30,18 @@ export function kcFactory(keycloakService: KeycloakService) {
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    KeycloakAngularModule
   ],
   providers: [
     {
       provide: APP_INITIALIZER,
-      useFactory: kcFactory,
-      deps: [KeycloakService],
-      multi: true
-    }
+      useFactory: initializer,
+      multi: true,
+      deps: [KeycloakService]
+    },
+    AppAuthGuard,
+    AdminAuthGuard
   ],
   bootstrap: [AppComponent]
 })
