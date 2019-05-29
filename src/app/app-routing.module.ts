@@ -6,11 +6,12 @@ import { AdminComponent } from './admin/admin.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AppAuthGuard } from './KioskAuthGuard';
 import { AdminAuthGuard } from './AdminAuthGuard';
+import { InitComponent } from './init/init.component';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 const routes: Routes = [
-  { path: '', component: ReadComponent , canActivate: [AppAuthGuard], data: { roles: ['KIOSK','ADMIN'] } },
-  { path: 'read', component: ReadComponent },
-  { path: 'write', component: WriteComponent },
+  { path: '', component: InitComponent},
+  { path: 'unauthorized', component: UnauthorizedComponent},
   { path: 'welcome', component: WelcomeComponent , canActivate: [AppAuthGuard], data: { roles: ['KIOSK'] } },
   { path: 'admin', component: AdminComponent, canActivate: [AdminAuthGuard], data: { roles: ['ADMIN'] }  }
 ];

@@ -14,6 +14,8 @@ import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { initializer } from './app-init';
 import { AppAuthGuard } from './KioskAuthGuard';
 import { AdminAuthGuard } from './AdminAuthGuard';
+import { InitComponent } from './init/init.component';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { AdminAuthGuard } from './AdminAuthGuard';
     ReadComponent,
     WriteComponent,
     AdminComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    InitComponent,
+    UnauthorizedComponent
   ],
   imports: [
     BrowserModule,
